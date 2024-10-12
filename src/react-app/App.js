@@ -4,12 +4,28 @@ import './App.css';
 
 function App() {
   const inputRef = useRef();
+  const buttonRef = useRef();
 
   useEffect(() => {
     if (inputRef.current) {
       console.log(inputRef.current.childNodes);
     }
   }, [inputRef])
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (button) {
+      button.addEventListener('onClick', value => console.log(value));
+
+      // button.onClick = (message) => {
+      //   console.log(message);
+      // }
+
+      // return () => {
+      //   button.onClick = null;
+      // }
+    }
+  }, [buttonRef])
 
   return (
     <div className="App">
@@ -30,6 +46,9 @@ function App() {
             <li>Six</li>
           </ul>
         </ul>
+        <custom-button label="Click" ref={buttonRef}></custom-button>
+        <custom-button label="Click" as-atom></custom-button>
+        <custom-dropdown label="Select" option="One"></custom-dropdown>
       </header>
     </div>
   );
